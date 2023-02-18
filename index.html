@@ -16,6 +16,9 @@
 
 <body>
     <div id="app">
+        <button class="log-stats">
+            Log Stats
+        </button>
         <div class="steam-card">
             <div class="game-info">
                 <div class="game-info--photo">
@@ -49,7 +52,7 @@
             <ul>
                 <li>
                     <span>SRS</span>
-                    <span data-hours="KANJI">...</span>
+                    <span data-hours="SRS">...</span>
                 </li>
                 <li>
                     <span>Reading</span>
@@ -73,23 +76,45 @@
                 </li>
             </ul>
         </div>
+        <div class="today-result">
+            <div class="today-result--time">
+                00 : 00
+            </div>
+            &nbsp;
+            <div class="today-result--text">
+                Hours Immersed Today
+            </div>
+        </div>
         <div class="session-result">
             <div class="session-result--time">
                 00 : 00
             </div>
             &nbsp;
             <div class="session-result--text">
-                Hours Immersed!
+                Hours Immersed This Session
             </div>
         </div>
         <div class="panel">
-            <button class="panel-item" data-type="KANJI">SRS<i class="ri-character-recognition-line"></i></button>
+            <button class="panel-item" data-type="SRS">SRS<i class="ri-character-recognition-line"></i></button>
             <button class="panel-item" data-type="READING">Reading<i class="ri-book-open-line"></i></button>
             <button class="panel-item" data-type="LISTENING">Listening<i class="ri-user-received-line"></i></button>
             <button class="panel-item" data-type="VIDEO_GAMES">Video Games<i class="ri-game-line"></i></button>
             <button class="panel-item" data-type="WRITING">Writing<i class="ri-pencil-line"></i></button>
             <button class="panel-item" data-type="SPEAKING">Speaking<i class="ri-kakao-talk-line"></i></button>
         </div>
+        <form class="add-outer-value" method="get">
+            <input type="number" value="0" name="add-hours" placeholder="Hours">
+            <input type="number" value="0" name="add-minutes" placeholder="Minutes">
+            <select name="time-options">
+                <option value="SRS">SRS</option>
+                <option value="READING">Reading</option>
+                <option value="LISTENING">Listening</option>
+                <option value="VIDEO_GAMES">Video Games</option>
+                <option value="WRITING">Writing</option>
+                <option value="SPEAKING">Speaking</option>
+            </select>
+            <input type="submit" value="Add Time" name="add-time">
+        </form>
     </div>
 </body>
 

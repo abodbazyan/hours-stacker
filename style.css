@@ -27,6 +27,18 @@ body {
     flex-direction: column;
 }
 
+.log-stats {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+    outline: 0;
+    background-color: var(--dark-2);
+    color: #777777;
+    padding: 4px;
+    cursor: pointer;
+}
+
 .steam-card {
     display: flex;
     flex-direction: column;
@@ -149,6 +161,18 @@ body {
     background-color: var(--dark-3);
 }
 
+.today-result {
+    display: flex;
+    justify-content: center;
+    column-gap: 8px;
+    width: 650px;
+    margin: 24px auto;
+    margin-bottom: 0px;
+    padding: 4px 16px;
+    font-size: 18px;
+    background-color: var(--dark-4);
+}
+
 .session-result {
     display: flex;
     justify-content: center;
@@ -198,4 +222,34 @@ body {
 
 .panel .panel-item i {
     font-size: 22px;
+}
+
+.add-outer-value {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 8px;
+    width: 650px;
+    margin: 24px auto;
+    margin-bottom: 0px;
+    padding: 4px 16px;
+    font-size: 18px;
+    background-color: var(--dark-4);
+}
+
+.add-outer-value input,
+.add-outer-value select {
+    border: 0;
+    outline: 0;
+    padding: 4px;
+    width: 75px;
+    background-color: var(--dark-3);
+    color: var(--white);
+}
+
+.add-outer-value input[type="submit"] {
+    cursor: pointer;
+}
+
+.add-outer-value select {
+    width: fit-content;
 }

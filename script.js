@@ -1,11 +1,12 @@
 const STORAGE = {
-    KANJI: 'time_kanji',
+    SRS: 'time_srs',
     READING: 'time_reading',
     LISTENING: 'time_listening',
     VIDEO_GAMES: 'time_video_games',
     WRITING: 'time_writing',
     SPEAKING: 'time_speaking',
-    SESSION: 'time_session'
+    SESSION: 'time_session',
+    TODAY: 'time_today'
 };
 
 initApp();
@@ -13,6 +14,8 @@ initApp();
 function initApp() {
     const html_show_details = document.querySelector('#show-details');
     const action_btns = document.querySelectorAll('.panel-item');
+    const log_stats_btn = document.querySelector('.log-stats');
+    const add_outer_value_form = document.querySelector('.add-outer-value');
 
     html_show_details.addEventListener('click', function (event) {
         event.preventDefault();
@@ -43,7 +46,7 @@ function initApp() {
                     }
                 });
 
-                html_session_result_time.innerText = '00 : 00';
+                html_session_result_time.innerText = convertMsToHM(0, 'hm');
 
                 setValue(STORAGE.SESSION, Date.now());
 
@@ -51,14 +54,24 @@ function initApp() {
                     return 'Are you sure?';
                 }
 
+                window.onunload = function () {
+                    const session_time = Date.now() - getValue(STORAGE.SESSION);
+                    setValue(STORAGE.SESSION, session_time);
+                }
+
                 clicked_btn.classList.add('active');
             } else {
                 const session_time = Date.now() - getValue(STORAGE.SESSION);
                 const current_total_time = getValue(STORAGE[this.dataset.type]);
                 const new_total_time = current_total_time + session_time;
+                const today_data = getValue(STORAGE.TODAY);
+                const new_today_time = today_data.time + session_time;
+
+                today_data.time = new_today_time;
 
                 setValue(STORAGE[this.dataset.type], new_total_time);
                 setValue(STORAGE.SESSION, 0);
+                setValue(STORAGE.TODAY, today_data);
 
                 html_session_result_time.innerText = convertMsToHM(session_time, 'hm');
 
@@ -67,6 +80,7 @@ function initApp() {
                 });
 
                 window.onbeforeunload = null;
+                window.onunload = null;
 
                 clicked_btn.classList.remove('active');
             }
@@ -74,6 +88,41 @@ function initApp() {
             refreshApp();
         })
     }
+
+    log_stats_btn.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        for (object_key in STORAGE) {
+            const object_value = STORAGE[object_key];
+            const storage_value = getValue(object_value);
+            const readable_value = convertMsToHM(storage_value, 'hm');
+
+            console.log(object_value, '|', storage_value, '|', readable_value);
+        }
+    });
+
+    add_outer_value_form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const hours = document.getElementsByName("add-hours")[0];
+        const minutes = document.getElementsByName("add-minutes")[0];
+        const submit = document.getElementsByName("add-time")[0];
+        const time_options = document.getElementsByName("time-options")[0];
+        const current_time = getValue(STORAGE[time_options.value]);
+        let result = 0;
+
+        submit.disabled = true;
+
+        result = (hours.value * 3600000) + (minutes.value * 60000);
+        result = result + current_time;
+        setValue(STORAGE[time_options.value], result);
+
+        hours.value = 0;
+        minutes.value = 0;
+
+        refreshApp();
+        submit.disabled = false;
+    })
 
     refreshApp();
 }
@@ -83,6 +132,7 @@ function refreshApp() {
     const html_game_info_hours = document.querySelector('#game-info-hours');
     const html_progress_bar = document.querySelector('.progress-bar--value');
     const html_progress_tick = document.querySelector('.progress-tick');
+    const html_today_result_time = document.querySelector('.today-result--time');
     let total_value = 0;
 
     html_hours_elements.forEach(element => {
@@ -100,14 +150,27 @@ function refreshApp() {
     if (progress >= 100) {
         html_progress_tick.style.display = 'block'
     }
+
+    const today_data = getValue(STORAGE.TODAY);
+
+    if (isToday(new Date(today_data?.date))) {
+        html_today_result_time.innerText = convertMsToHM(today_data.time, 'hm');
+    } else {
+        const newDate = {
+            time: 0,
+            date: new Date()
+        };
+
+        setValue(STORAGE.TODAY, newDate);
+    }
 }
 
 function getValue(key) {
-    return Number(window.localStorage.getItem(key)) || 0;
+    return JSON.parse(window.localStorage.getItem(key)) || 0;
 }
 
 function setValue(key, value) {
-    window.localStorage.setItem(key, String(value));
+    window.localStorage.setItem(key, JSON.stringify(value));
 }
 
 function convertMsToHM(milliseconds, format) {
@@ -130,4 +193,9 @@ function convertMsToHM(milliseconds, format) {
     } else if (format == 'h') {
         return `${padTo2Digits(hours)}`;
     }
+}
+
+function isToday(dateParameter) {
+    const today = new Date();
+    return dateParameter?.getDate() === today?.getDate() && dateParameter?.getMonth() === today?.getMonth() && dateParameter?.getFullYear() === today?.getFullYear();
 }
