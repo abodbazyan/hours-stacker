@@ -109,13 +109,26 @@ function initApp() {
         const submit = document.getElementsByName("add-time")[0];
         const time_options = document.getElementsByName("time-options")[0];
         const current_time = getValue(STORAGE[time_options.value]);
-        let result = 0;
+        const today_data = getValue(STORAGE.TODAY);
 
         submit.disabled = true;
 
-        result = (hours.value * 3600000) + (minutes.value * 60000);
-        result = result + current_time;
-        setValue(STORAGE[time_options.value], result);
+        const result = (hours.value * 3600000) + (minutes.value * 60000);
+        const total = result + current_time;
+        setValue(STORAGE[time_options.value], total);
+
+        if (isToday(new Date(today_data?.date))) {
+            const new_today_time = today_data.time + result;
+            today_data.time = new_today_time;
+            setValue(STORAGE.TODAY, today_data);
+        } else {
+            const newDate = {
+                time: 0,
+                date: new Date()
+            };
+
+            setValue(STORAGE.TODAY, newDate);
+        }
 
         hours.value = 0;
         minutes.value = 0;
