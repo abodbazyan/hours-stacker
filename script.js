@@ -108,6 +108,7 @@ function initApp() {
         const minutes = document.getElementsByName("add-minutes")[0];
         const submit = document.getElementsByName("add-time")[0];
         const time_options = document.getElementsByName("time-options")[0];
+        const add_to_today = document.getElementsByName("add-to-today")[0];
         const current_time = getValue(STORAGE[time_options.value]);
         const today_data = getValue(STORAGE.TODAY);
 
@@ -117,21 +118,15 @@ function initApp() {
         const total = result + current_time;
         setValue(STORAGE[time_options.value], total);
 
-        if (isToday(new Date(today_data?.date))) {
+        if (add_to_today.checked) {
             const new_today_time = today_data.time + result;
             today_data.time = new_today_time;
             setValue(STORAGE.TODAY, today_data);
-        } else {
-            const newDate = {
-                time: 0,
-                date: new Date()
-            };
-
-            setValue(STORAGE.TODAY, newDate);
         }
 
         hours.value = 0;
         minutes.value = 0;
+        add_to_today.checked = false;
 
         refreshApp();
         submit.disabled = false;
