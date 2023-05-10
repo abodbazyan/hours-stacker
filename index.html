@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="./imgs/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
     <script defer src="./script.js"></script>
     <title>GRIND GRIND GRIND</title>
 </head>
@@ -23,7 +23,7 @@
         <div class="steam-card">
             <div class="game-info">
                 <div class="game-info--photo">
-                    <img src="./imgs/japan.jpg" alt="japan" width="900" height="529">
+                    <img src="./assets/japan.jpg" alt="japan" width="900" height="529">
                 </div>
                 <div class="game-info--name">
                     日本語
@@ -35,17 +35,6 @@
                     <span id="show-details">
                         Show Details
                     </span>
-                </div>
-            </div>
-            <div class="game-achivements">
-                <div class="progress-text">
-                    Achievement Progress
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-bar--value"></div>
-                </div>
-                <div class="progress-tick">
-                    &#10004;
                 </div>
             </div>
         </div>
@@ -119,6 +108,43 @@
             &nbsp;
             <input type="submit" value="Add Time" name="add-time">
         </form>
+        <div class="levels-card">
+            <div class="game-achivements">
+                <p>N5</p>
+                <div class="progress-bar">
+                    <div id="N5" class="progress-bar--value"></div>
+                </div>
+                <p>462 Hours / 800 Vocabulary / 100 Kanji</p>
+            </div>
+            <div class="game-achivements">
+                <p>N4</p>
+                <div class="progress-bar">
+                    <div id="N4" class="progress-bar--value"></div>
+                </div>
+                <p>787 Hours / 1500 Vocabulary / 300 Kanji</p>
+            </div>
+            <div class="game-achivements">
+                <p>N3</p>
+                <div class="progress-bar">
+                    <div id="N3" class="progress-bar--value"></div>
+                </div>
+                <p>1325 Hours / 3700 Vocabulary / 650 Kanji</p>
+            </div>
+            <div class="game-achivements">
+                <p>N2</p>
+                <div class="progress-bar">
+                    <div id="N2" class="progress-bar--value"></div>
+                </div>
+                <p>2200 Hours / 6000 Vocabulary / 1000 Kanji</p>
+            </div>
+            <div class="game-achivements">
+                <p>N1&nbsp;</p>
+                <div class="progress-bar">
+                    <div id="N1" class="progress-bar--value"></div>
+                </div>
+                <p>3900 Hours / 10000 Vocabulary / 2200 Kanji</p>
+            </div>
+        </div>
     </div>
 </body>
 

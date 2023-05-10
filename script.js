@@ -138,8 +138,11 @@ function initApp() {
 function refreshApp() {
     const html_hours_elements = document.querySelectorAll('[data-hours]');
     const html_game_info_hours = document.querySelector('#game-info-hours');
-    const html_progress_bar = document.querySelector('.progress-bar--value');
-    const html_progress_tick = document.querySelector('.progress-tick');
+    const html_progress_bar_n5 = document.querySelector('#N5');
+    const html_progress_bar_n4 = document.querySelector('#N4');
+    const html_progress_bar_n3 = document.querySelector('#N3');
+    const html_progress_bar_n2 = document.querySelector('#N2');
+    const html_progress_bar_n1 = document.querySelector('#N1');
     const html_today_result_time = document.querySelector('.today-result--time');
     let total_value = 0;
 
@@ -150,13 +153,55 @@ function refreshApp() {
     });
 
     const value_game_info_hours = convertMsToHM(total_value, 'hm');
-    const progress = convertMsToHM(total_value, 'h') / 22;
+    let progress = convertMsToHM(total_value, 'h');
 
     html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
-    html_progress_bar.style.width = `${progress}%`;
 
-    if (progress >= 100) {
-        html_progress_tick.style.display = 'block'
+    if (progress <= 462) {
+        html_progress_bar_n5.style.width = `${progress / 4.62}%`;
+    } else if (progress <= 787) {
+        progress -= 462;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${progress / 3.25}%`;
+        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+    } else if (progress <= 1325) {
+        progress -= 787;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n3.style.width = `${progress / 5.38}%`;
+    } else if (progress <= 2200) {
+        progress -= 1325;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n2.style.width = `${progress / 8.75}%`;
+    } else if (progress <= 3900) {
+        progress -= 2200;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_progress_bar_n2.style.width = `${100}%`;
+        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n2.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n1.style.width = `${progress / 17}%`;
+    } else {
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_progress_bar_n2.style.width = `${100}%`;
+        html_progress_bar_n1.style.width = `${100}%`;
+        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n2.parentElement.classList.add('progress-bar-complete');
+        html_progress_bar_n1.parentElement.classList.add('progress-bar-complete');
     }
 
     const today_data = getValue(STORAGE.TODAY);
