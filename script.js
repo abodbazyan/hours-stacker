@@ -2,7 +2,7 @@ const STORAGE = {
     SRS: 'time_srs',
     READING: 'time_reading',
     LISTENING: 'time_listening',
-    VIDEO_GAMES: 'time_video_games',
+    COMBO: 'time_combo',
     WRITING: 'time_writing',
     SPEAKING: 'time_speaking',
     SESSION: 'time_session',
