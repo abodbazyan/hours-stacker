@@ -25,6 +25,10 @@ body {
 #app {
     display: flex;
     flex-direction: column;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 
 .log-stats {
@@ -45,6 +49,7 @@ body {
     margin: 24px auto;
     margin-bottom: 0px;
     background-color: var(--dark-4);
+    position: relative;
 }
 
 .game-info {
@@ -55,7 +60,7 @@ body {
 
 .game-info--photo {
     width: 200px;
-    height: 100%;
+    height: 135px;
 }
 
 .game-info--photo img {
@@ -235,6 +240,7 @@ body {
     margin: 8px auto;
     margin-bottom: 0px;
     background-color: var(--dark-4);
+    position: relative;
 }
 
 .game-achivements {
@@ -262,4 +268,112 @@ body {
 
 .progress-bar-complete {
     box-shadow: 0 0 5px 3px #f3c623;
+}
+
+.bg-img {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.bg-img-1 {
+    left: 16px;
+    bottom: 0px;
+}
+
+.bg-img-2 {
+    right: 16px;
+    bottom: -16px;
+}
+
+.bg-img-3 {
+    bottom: -3px;
+    left: 282px;
+}
+
+.bg-img-4 {
+    top: 92px;
+    right: -64px;
+}
+
+.bg-img-5 {
+    top: 12px;
+    left: -64px;
+    transform: rotateY(180deg);
+}
+
+.bg-img-6 {
+    bottom: -64px;
+    left: 64px;
+}
+
+.bg-img-7 {
+    bottom: -64px;
+    right: 64px;
+}
+
+.bg-img-8 {
+    top: -22px;
+    right: -22px;
+    z-index: 0;
+    opacity: 1;
+    transform: rotateZ(15deg)
+}
+
+.bg-img-glow {
+    position: absolute;
+    z-index: -2;
+    opacity: 0.2;
+}
+
+.bg-img-glow-6 {
+    bottom: -59px;
+    left: 76px;
+    height: 44px;
+    width: 42px;
+    border-radius: 50%;
+    animation: glow 1.5s linear infinite alternate;
+}
+
+.bg-img-glow-7 {
+    bottom: -59px;
+    right: 76px;
+    height: 44px;
+    width: 42px;
+    border-radius: 50%;
+    animation: glow 1.5s linear infinite alternate;
+}
+
+@keyframes glow {
+    to {
+        box-shadow: 0 0 15px 15px palevioletred;
+    }
+}
+
+div.clickEffect {
+    position: fixed;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-radius: 50%;
+    animation: clickEffect 0.4s ease-out;
+    z-index: 99999;
+}
+
+@keyframes clickEffect {
+    0% {
+        opacity: 1;
+        width: 0.5em;
+        height: 0.5em;
+        margin: -0.25em;
+        border-width: 0.5em;
+    }
+
+    100% {
+        opacity: 0.2;
+        width: 15em;
+        height: 15em;
+        margin: -7.5em;
+        border-width: 0.03em;
+    }
 }

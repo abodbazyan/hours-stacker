@@ -252,3 +252,17 @@ function isToday(dateParameter) {
     const today = new Date();
     return dateParameter?.getDate() === today?.getDate() && dateParameter?.getMonth() === today?.getMonth() && dateParameter?.getFullYear() === today?.getFullYear();
 }
+
+function clickEffect(e) {
+    const d = document.createElement("div");
+    const clickSound = new Audio('./assets/others/click-sound.wav');
+
+    d.className = "clickEffect";
+    d.style.top = e.clientY + "px";
+    d.style.left = e.clientX + "px";
+    document.body.appendChild(d);
+    d.addEventListener('animationend', function () { d.parentElement.removeChild(d); }.bind(this));
+    clickSound.play();
+}
+
+document.addEventListener('click', clickEffect);
