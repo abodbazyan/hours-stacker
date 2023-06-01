@@ -154,7 +154,7 @@ body {
 .panel {
     display: grid;
     grid-template-columns: 33% 33% 33%;
-    gap: 2px;
+    gap: 16px 6px;
     width: 650px;
     padding: 16px;
     margin: 8px auto;
@@ -167,23 +167,31 @@ body {
     justify-content: center;
     align-items: center;
     column-gap: 4px;
-    font-size: 18px;
+    padding: 15px 25px;
+    font-size: 20px;
     text-align: center;
-    padding: 20px;
+    cursor: pointer;
+    outline: none;
     color: inherit;
-    background-color: var(--dark-3);
-    border: 0;
-    outline: 0;
+    background-color: palevioletred;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    transition: all ease 0.1s;
 }
 
 .panel .panel-item:hover {
     cursor: pointer;
-    background-color: var(--dark-2);
+    background-color: pink;
 }
 
 .panel .panel-item:disabled {
     opacity: 0.4;
     color: var(--dark-4);
+}
+
+.panel .panel-item:active {
+    transform: translateY(4px);
 }
 
 .panel .panel-item i {
@@ -371,9 +379,9 @@ div.clickEffect {
 
     100% {
         opacity: 0.2;
-        width: 15em;
-        height: 15em;
-        margin: -7.5em;
+        width: 5em;
+        height: 5em;
+        margin: -2.5em;
         border-width: 0.03em;
     }
 }
