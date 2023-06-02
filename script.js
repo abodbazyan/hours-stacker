@@ -9,6 +9,8 @@ const STORAGE = {
     TODAY: 'time_today'
 };
 
+const clickSound = new Audio('./assets/others/click-sound.wav');
+
 initApp();
 
 function initApp() {
@@ -255,7 +257,6 @@ function isToday(dateParameter) {
 
 function clickEffect(e) {
     const d = document.createElement("div");
-    const clickSound = new Audio('./assets/others/click-sound.wav');
 
     d.className = "clickEffect";
     d.style.top = e.clientY + "px";
