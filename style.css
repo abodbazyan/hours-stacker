@@ -298,6 +298,7 @@ body {
 .bg-img-3 {
     bottom: -3px;
     left: 282px;
+    z-index: unset;
 }
 
 .bg-img-4 {
