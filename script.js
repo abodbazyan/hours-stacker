@@ -160,7 +160,7 @@ function refreshApp() {
     });
 
     const value_game_info_hours = convertMsToHM(total_value, 'hm');
-    let progress = 500//convertMsToHM(total_value, 'h');
+    let progress = convertMsToHM(total_value, 'h');
 
     html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
 
