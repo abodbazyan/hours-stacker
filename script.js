@@ -145,6 +145,11 @@ function refreshApp() {
     const html_progress_bar_n3 = document.querySelector('#N3');
     const html_progress_bar_n2 = document.querySelector('#N2');
     const html_progress_bar_n1 = document.querySelector('#N1');
+    const html_title_n5 = document.querySelector('#N5-title');
+    const html_title_n4 = document.querySelector('#N4-title');
+    const html_title_n3 = document.querySelector('#N3-title');
+    const html_title_n2 = document.querySelector('#N2-title');
+    const html_title_n1 = document.querySelector('#N1-title');
     const html_today_result_time = document.querySelector('.today-result--time');
     let total_value = 0;
 
@@ -155,7 +160,7 @@ function refreshApp() {
     });
 
     const value_game_info_hours = convertMsToHM(total_value, 'hm');
-    let progress = convertMsToHM(total_value, 'h');
+    let progress = 500//convertMsToHM(total_value, 'h');
 
     html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
 
@@ -165,22 +170,22 @@ function refreshApp() {
         progress -= 462;
         html_progress_bar_n5.style.width = `${100}%`;
         html_progress_bar_n4.style.width = `${progress / 3.25}%`;
-        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
+        html_title_n5.classList.add('progress-bar-complete');
     } else if (progress <= 1325) {
         progress -= 787;
         html_progress_bar_n5.style.width = `${100}%`;
         html_progress_bar_n4.style.width = `${100}%`;
-        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
         html_progress_bar_n3.style.width = `${progress / 5.38}%`;
     } else if (progress <= 2200) {
         progress -= 1325;
         html_progress_bar_n5.style.width = `${100}%`;
         html_progress_bar_n4.style.width = `${100}%`;
         html_progress_bar_n3.style.width = `${100}%`;
-        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
         html_progress_bar_n2.style.width = `${progress / 8.75}%`;
     } else if (progress <= 3900) {
         progress -= 2200;
@@ -188,10 +193,10 @@ function refreshApp() {
         html_progress_bar_n4.style.width = `${100}%`;
         html_progress_bar_n3.style.width = `${100}%`;
         html_progress_bar_n2.style.width = `${100}%`;
-        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n2.parentElement.classList.add('progress-bar-complete');
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
+        html_title_n2.classList.add('progress-bar-complete');
         html_progress_bar_n1.style.width = `${progress / 17}%`;
     } else {
         html_progress_bar_n5.style.width = `${100}%`;
@@ -199,11 +204,11 @@ function refreshApp() {
         html_progress_bar_n3.style.width = `${100}%`;
         html_progress_bar_n2.style.width = `${100}%`;
         html_progress_bar_n1.style.width = `${100}%`;
-        html_progress_bar_n5.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n4.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n3.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n2.parentElement.classList.add('progress-bar-complete');
-        html_progress_bar_n1.parentElement.classList.add('progress-bar-complete');
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
+        html_title_n2.classList.add('progress-bar-complete');
+        html_title_n1.classList.add('progress-bar-complete');
     }
 
     const today_data = getValue(STORAGE.TODAY);
@@ -254,16 +259,3 @@ function isToday(dateParameter) {
     const today = new Date();
     return dateParameter?.getDate() === today?.getDate() && dateParameter?.getMonth() === today?.getMonth() && dateParameter?.getFullYear() === today?.getFullYear();
 }
-
-function clickEffect(e) {
-    const d = document.createElement("div");
-
-    d.className = "clickEffect";
-    d.style.top = e.clientY + "px";
-    d.style.left = e.clientX + "px";
-    document.body.appendChild(d);
-    d.addEventListener('animationend', function () { d.parentElement.removeChild(d); }.bind(this));
-    clickSound.play();
-}
-
-document.addEventListener('click', clickEffect);

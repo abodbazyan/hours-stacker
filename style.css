@@ -16,7 +16,7 @@ ul {
 }
 
 body {
-    font-family: 'Exo', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.6;
     color: var(--white);
     background-color: var(--dark-1);
@@ -70,9 +70,9 @@ body {
 }
 
 .game-info--name {
-    font-size: 22px;
+    font-size: 34px;
     margin-left: 8px;
-    margin-top: 8px;
+    text-shadow: 0px 0px 4px #fff;
 }
 
 .game-info--hours {
@@ -155,7 +155,7 @@ body {
 .panel {
     display: grid;
     grid-template-columns: 33% 33% 33%;
-    gap: 16px 6px;
+    gap: 2px;
     width: 650px;
     padding: 16px;
     margin: 8px auto;
@@ -164,39 +164,23 @@ body {
 }
 
 .panel .panel-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 4px;
-    padding: 15px 25px;
-    font-size: 20px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
+    font-size: 18px;
+    font-family: inherit;
+    padding: 16px 0px;
     color: inherit;
-    background-color: palevioletred;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #999;
-    transition: all ease 0.1s;
+    background-color: var(--dark-3);
+    border: 0;
+    outline: 0;
 }
 
 .panel .panel-item:hover {
     cursor: pointer;
-    background-color: pink;
+    background-color: var(--dark-2);
 }
 
 .panel .panel-item:disabled {
     opacity: 0.4;
     color: var(--dark-4);
-}
-
-.panel .panel-item:active {
-    transform: translateY(4px);
-}
-
-.panel .panel-item i {
-    font-size: 22px;
 }
 
 .add-outer-value {
@@ -272,33 +256,27 @@ body {
 .game-achivements .progress-bar .progress-bar--value {
     height: 100%;
     width: 0%;
-    background-color: var(--warning);
+    background-color: crimson;
 }
 
 .progress-bar-complete {
-    box-shadow: 0 0 5px 3px #f3c623;
+    color: var(--warning);
+    text-shadow: 0px 0px 4px var(--warning);
+}
+
+.game-achivements p:first-child {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.game-achivements p .seperator {
+    color: crimson;
+    font-weight: 800;
 }
 
 .bg-img {
     position: absolute;
     z-index: -1;
-    opacity: 0.4;
-}
-
-.bg-img-1 {
-    left: 16px;
-    bottom: 0px;
-}
-
-.bg-img-2 {
-    right: 16px;
-    bottom: -16px;
-}
-
-.bg-img-3 {
-    bottom: -3px;
-    left: 282px;
-    z-index: unset;
 }
 
 .bg-img-4 {
@@ -312,78 +290,9 @@ body {
     transform: rotateY(180deg);
 }
 
-.bg-img-6 {
-    bottom: -64px;
-    left: 64px;
-}
-
-.bg-img-7 {
-    bottom: -64px;
-    right: 64px;
-}
-
 .bg-img-8 {
     top: -22px;
     right: -22px;
     z-index: 0;
-    opacity: 1;
     transform: rotateZ(15deg)
-}
-
-.bg-img-glow {
-    position: absolute;
-    z-index: -2;
-    opacity: 0.2;
-}
-
-.bg-img-glow-6 {
-    bottom: -59px;
-    left: 76px;
-    height: 44px;
-    width: 42px;
-    border-radius: 50%;
-    animation: glow 1.5s linear infinite alternate;
-}
-
-.bg-img-glow-7 {
-    bottom: -59px;
-    right: 76px;
-    height: 44px;
-    width: 42px;
-    border-radius: 50%;
-    animation: glow 1.5s linear infinite alternate;
-}
-
-@keyframes glow {
-    to {
-        box-shadow: 0 0 15px 15px palevioletred;
-    }
-}
-
-div.clickEffect {
-    position: fixed;
-    box-sizing: border-box;
-    border-style: solid;
-    border-color: #FFFFFF;
-    border-radius: 50%;
-    animation: clickEffect 0.4s ease-out;
-    z-index: 99999;
-}
-
-@keyframes clickEffect {
-    0% {
-        opacity: 1;
-        width: 0.5em;
-        height: 0.5em;
-        margin: -0.25em;
-        border-width: 0.5em;
-    }
-
-    100% {
-        opacity: 0.2;
-        width: 5em;
-        height: 5em;
-        margin: -2.5em;
-        border-width: 0.03em;
-    }
 }
