@@ -126,8 +126,8 @@ function initApp() {
             setValue(STORAGE.TODAY, today_data);
         }
 
-        hours.value = 0;
-        minutes.value = 0;
+        hours.value = "";
+        minutes.value = "";
         add_to_today.checked = false;
 
         refreshApp();
