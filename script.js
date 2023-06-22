@@ -9,8 +9,6 @@ const STORAGE = {
     TODAY: 'time_today'
 };
 
-const clickSound = new Audio('./assets/others/click-sound.wav');
-
 initApp();
 
 function initApp() {
