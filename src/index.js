@@ -1,3 +1,15 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, onSnapshot, updateDoc, doc } from 'firebase/firestore';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCptZszH6wv8Bel3YixMmPsU1GrUQMFkAY",
+    authDomain: "hours-stacker.firebaseapp.com",
+    projectId: "hours-stacker",
+    storageBucket: "hours-stacker.appspot.com",
+    messagingSenderId: "768852148058",
+    appId: "1:768852148058:web:00c5c326baea1eb21b3d63"
+};
+
 const STORAGE = {
     SRS: 'time_srs',
     READING: 'time_reading',
@@ -9,12 +21,35 @@ const STORAGE = {
     TODAY: 'time_today'
 };
 
-initApp();
+initializeApp(firebaseConfig);
 
-function initApp() {
+const db = getFirestore();
+const colRef = collection(db, 'time');
+let state = undefined, isFirstLoad = true;
+
+onSnapshot(colRef, (snapshot) => {
+    state = {
+        id: snapshot?.docs[0]?.id,
+        ...snapshot?.docs[0]?.data()
+    };
+
+    if (isFirstLoad) {
+        isFirstLoad = false;
+        setupApp();
+    } else {
+        displayData();
+    }
+
+    const timeout = Math.floor(Math.random() * (1000 - 500 + 1) + 500);
+
+    setTimeout(() => {
+        setLoading(false);
+    }, timeout);
+});
+
+function setupApp() {
     const html_show_details = document.querySelector('#show-details');
     const action_btns = document.querySelectorAll('.panel-item');
-    const log_stats_btn = document.querySelector('.log-stats');
     const add_outer_value_form = document.querySelector('.add-outer-value');
 
     html_show_details.addEventListener('click', function (event) {
@@ -54,11 +89,6 @@ function initApp() {
                     return 'Are you sure?';
                 }
 
-                window.onunload = function () {
-                    const session_time = Date.now() - getValue(STORAGE.SESSION);
-                    setValue(STORAGE.SESSION, session_time);
-                }
-
                 clicked_btn.classList.add('active');
             } else {
                 const session_time = Date.now() - getValue(STORAGE.SESSION);
@@ -69,7 +99,7 @@ function initApp() {
 
                 today_data.time = new_today_time;
 
-                setValue(STORAGE[this.dataset.type], new_total_time);
+                updateValue(STORAGE[this.dataset.type], new_total_time);
                 setValue(STORAGE.SESSION, 0);
                 setValue(STORAGE.TODAY, today_data);
 
@@ -80,26 +110,11 @@ function initApp() {
                 });
 
                 window.onbeforeunload = null;
-                window.onunload = null;
 
                 clicked_btn.classList.remove('active');
             }
-
-            refreshApp();
-        })
+        });
     }
-
-    log_stats_btn.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        for (object_key in STORAGE) {
-            const object_value = STORAGE[object_key];
-            const storage_value = getValue(object_value);
-            const readable_value = convertMsToHM(storage_value, 'hm');
-
-            console.log(object_value, '|', storage_value, '|', readable_value);
-        }
-    });
 
     add_outer_value_form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -116,7 +131,6 @@ function initApp() {
 
         const result = (hours.value * 3600000) + (minutes.value * 60000);
         const total = result + current_time;
-        setValue(STORAGE[time_options.value], total);
 
         if (add_to_today.checked) {
             const new_today_time = today_data.time + result;
@@ -124,18 +138,19 @@ function initApp() {
             setValue(STORAGE.TODAY, today_data);
         }
 
+        updateValue(STORAGE[time_options.value], total);
+
         hours.value = "";
         minutes.value = "";
         add_to_today.checked = false;
 
-        refreshApp();
         submit.disabled = false;
-    })
+    });
 
-    refreshApp();
-}
+    displayData();
+};
 
-function refreshApp() {
+function displayData() {
     const html_hours_elements = document.querySelectorAll('[data-hours]');
     const html_game_info_hours = document.querySelector('#game-info-hours');
     const html_progress_bar_n5 = document.querySelector('#N5');
@@ -160,7 +175,7 @@ function refreshApp() {
     const value_game_info_hours = convertMsToHM(total_value, 'hm');
     let progress = convertMsToHM(total_value, 'h');
 
-    html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
+    html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 合計時間`;
 
     if (progress <= 462) {
         html_progress_bar_n5.style.width = `${progress / 4.62}%`;
@@ -185,7 +200,7 @@ function refreshApp() {
         html_title_n4.classList.add('progress-bar-complete');
         html_title_n3.classList.add('progress-bar-complete');
         html_progress_bar_n2.style.width = `${progress / 8.75}%`;
-    } else if (progress <= 3900) {
+    } else if (progress < 3900) {
         progress -= 2200;
         html_progress_bar_n5.style.width = `${100}%`;
         html_progress_bar_n4.style.width = `${100}%`;
@@ -221,15 +236,39 @@ function refreshApp() {
 
         setValue(STORAGE.TODAY, newDate);
     }
-}
+};
 
 function getValue(key) {
-    return JSON.parse(window.localStorage.getItem(key)) || 0;
-}
+    if (key == STORAGE.SESSION || key == STORAGE.TODAY) {
+        return JSON.parse(window.localStorage.getItem(key)) || 0;
+    } else {
+        return state?.[key];
+    }
+};
 
 function setValue(key, value) {
     window.localStorage.setItem(key, JSON.stringify(value));
-}
+};
+
+function updateValue(key, value) {
+    setLoading(true);
+
+    const docRef = doc(db, 'time', state?.id);
+
+    updateDoc(docRef, {
+        [key]: value
+    })
+};
+
+function setLoading(value) {
+    const loading_screen = document.querySelector('.loading-screen');
+
+    if (value) {
+        loading_screen.style.display = 'block';
+    } else {
+        loading_screen.style.display = 'none';
+    }
+};
 
 function convertMsToHM(milliseconds, format) {
     let seconds = Math.floor(milliseconds / 1000);
@@ -251,9 +290,9 @@ function convertMsToHM(milliseconds, format) {
     } else if (format == 'h') {
         return `${padTo2Digits(hours)}`;
     }
-}
+};
 
 function isToday(dateParameter) {
     const today = new Date();
     return dateParameter?.getDate() === today?.getDate() && dateParameter?.getMonth() === today?.getMonth() && dateParameter?.getFullYear() === today?.getFullYear();
-}
+};
