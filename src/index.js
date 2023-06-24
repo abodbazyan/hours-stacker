@@ -99,9 +99,9 @@ function setupApp() {
 
                 today_data.time = new_today_time;
 
-                updateValue(STORAGE[this.dataset.type], new_total_time);
                 setValue(STORAGE.SESSION, 0);
                 setValue(STORAGE.TODAY, today_data);
+                updateValue(STORAGE[this.dataset.type], new_total_time);
 
                 html_session_result_time.innerText = convertMsToHM(session_time, 'hm');
 

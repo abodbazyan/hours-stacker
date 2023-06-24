@@ -279,8 +279,8 @@ body {
 }
 
 .bg-img-8 {
-    top: -22px;
-    right: -22px;
+    top: 0px;
+    right: -66px;
     z-index: 0;
     transform: rotateZ(15deg)
 }
