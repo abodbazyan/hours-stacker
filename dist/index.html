@@ -5,177 +5,180 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="assets/others/favicon.png">
+    <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.png">
     <script defer src="bundle.js"></script>
-    <title>GRIND GRIND GRIND</title>
+    <title>hours-stacker | watch those hours stack up</title>
 </head>
 
 <body>
     <div id="app">
-        <div class="steam-card">
-            <div class="game-info">
-                <div class="game-info--photo">
-                    <img src="assets/imgs/japan.webp" alt="japan" width="900" height="529" draggable="false">
+        <div class="time-tracker">
+            <div class="steam-card">
+                <div class="game-info">
+                    <div class="game-info--photo">
+                        <img src="assets/imgs/japan.webp" alt="japan" width="900" height="529" draggable="false">
+                    </div>
+                    <div class="game-info--name">
+                        日本語
+                    </div>
+                    <div class="game-info--hours">
+                        <span id="game-info-hours">
+                            00 : 00 &nbsp; 合計時間
+                        </span>
+                        <span id="show-details">
+                            詳細を表示
+                        </span>
+                    </div>
                 </div>
-                <div class="game-info--name">
-                    日本語
+                <a href="https://kanji.koohii.com/study" target="_blank">
+                    <img class="koohii-img" src="https://kanji.koohii.com/images/3.0/nav/koohii-logo.svg"
+                        draggable="false" />
+                </a>
+            </div>
+            <div id="hours-details" class="toggle-container">
+                <ul>
+                    <li>
+                        <span>ス.レ.ス</span>
+                        <span data-hours="SRS">...</span>
+                    </li>
+                    <li>
+                        <span>読む</span>
+                        <span data-hours="READING">...</span>
+                    </li>
+                    <li>
+                        <span>聞く</span>
+                        <span data-hours="LISTENING">...</span>
+                    </li>
+                    <li>
+                        <span>他の</span>
+                        <span data-hours="OTHER">...</span>
+                    </li>
+                    <li>
+                        <span>書く</span>
+                        <span data-hours="WRITING">...</span>
+                    </li>
+                    <li>
+                        <span>話す</span>
+                        <span data-hours="SPEAKING">...</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="today-result">
+                <div class="today-result--time">
+                    00 : 00
                 </div>
-                <div class="game-info--hours">
-                    <span id="game-info-hours">
-                        00 : 00 &nbsp; 合計時間
-                    </span>
-                    <span id="show-details">
-                        詳細を表示
-                    </span>
+                &nbsp;
+                <div class="today-result--text">
+                    今日の時間
                 </div>
             </div>
-            <img class="bg-img bg-img-4" src="assets/imgs/branch.webp" width="64" height="64" />
-            <img class="bg-img bg-img-5" src="assets/imgs/branch.webp" width="64" height="64" />
-            <a href="https://kanji.koohii.com/study" target="_blank">
-                <img class="bg-img bg-img-8" src="https://kanji.koohii.com/images/3.0/nav/koohii-logo.svg" width="132"
-                    draggable="false" />
-            </a>
+            <div class="session-result">
+                <div class="session-result--time">
+                    00 : 00
+                </div>
+                &nbsp;
+                <div class="session-result--text">
+                    セッション時間
+                </div>
+            </div>
+            <div class="panel">
+                <button class="panel-item" data-type="SRS">ス.レ.ス</button>
+                <button class="panel-item" data-type="READING">読む</button>
+                <button class="panel-item" data-type="LISTENING">聞く</button>
+                <button class="panel-item" data-type="OTHER">他の</button>
+                <button class="panel-item" data-type="WRITING">書く</button>
+                <button class="panel-item" data-type="SPEAKING">話す</button>
+            </div>
+            <form class="add-outer-value" method="get">
+                <input type="number" value="" name="add-hours" placeholder="時間">
+                <input type="number" value="" name="add-minutes" placeholder="分">
+                <select name="time-options">
+                    <option value="SRS">ス.レ.ス</option>
+                    <option value="READING">読む</option>
+                    <option value="LISTENING">聞く</option>
+                    <option value="OTHER">他の</option>
+                    <option value="WRITING">書く</option>
+                    <option value="SPEAKING">話す</option>
+                </select>
+                <input type="checkbox" name="add-to-today" id="add-to-today">
+                <label for="add-to-today">今日ですか？</label>
+                &nbsp;
+                <input type="submit" value="送信" name="add-time">
+            </form>
+            <div class="levels-card">
+                <div class="game-achivements">
+                    <p id="N5-title">ん5</p>
+                    <div class="progress-bar">
+                        <div id="N5" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>462 時間</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>800 の語彙</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>漢字 100 字</span>
+                    </p>
+                </div>
+                <div class="game-achivements">
+                    <p id="N4-title">ん4</p>
+                    <div class="progress-bar">
+                        <div id="N4" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>787 時間</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>1500 の語彙</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>漢字 300 字</span>
+                    </p>
+                </div>
+                <div class="game-achivements">
+                    <p id="N3-title">ん3</p>
+                    <div class="progress-bar">
+                        <div id="N3" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>1325 時間</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>3700 の語彙</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>漢字 650 字</span>
+                    </p>
+                </div>
+                <div class="game-achivements">
+                    <p id="N2-title">ん2</p>
+                    <div class="progress-bar">
+                        <div id="N2" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>2200 時間</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>6000 の語彙</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>漢字 1000 字</span>
+                    </p>
+                </div>
+                <div class="game-achivements">
+                    <p id="N1-title">ん1</p>
+                    <div class="progress-bar">
+                        <div id="N1" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>3900 時間</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>10000 の語彙</span>
+                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
+                        <span>漢字 2200 字</span>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div id="hours-details" class="toggle-container">
-            <ul>
-                <li>
-                    <span>ス.レ.ス</span>
-                    <span data-hours="SRS">...</span>
-                </li>
-                <li>
-                    <span>読む</span>
-                    <span data-hours="READING">...</span>
-                </li>
-                <li>
-                    <span>聞く</span>
-                    <span data-hours="LISTENING">...</span>
-                </li>
-                <li>
-                    <span>他の</span>
-                    <span data-hours="OTHER">...</span>
-                </li>
-                <li>
-                    <span>書く</span>
-                    <span data-hours="WRITING">...</span>
-                </li>
-                <li>
-                    <span>話す</span>
-                    <span data-hours="SPEAKING">...</span>
-                </li>
-            </ul>
-        </div>
-        <div class="today-result">
-            <div class="today-result--time">
-                00 : 00
+        <div class="habit-tracker">
+            <div class="tasks-header">
+                <h3>トゥードゥーリスト</h3>
             </div>
-            &nbsp;
-            <div class="today-result--text">
-                今日の時間
-            </div>
-        </div>
-        <div class="session-result">
-            <div class="session-result--time">
-                00 : 00
-            </div>
-            &nbsp;
-            <div class="session-result--text">
-                セッション時間
-            </div>
-        </div>
-        <div class="panel">
-            <button class="panel-item" data-type="SRS">ス.レ.ス</button>
-            <button class="panel-item" data-type="READING">読む</button>
-            <button class="panel-item" data-type="LISTENING">聞く</button>
-            <button class="panel-item" data-type="OTHER">他の</button>
-            <button class="panel-item" data-type="WRITING">書く</button>
-            <button class="panel-item" data-type="SPEAKING">話す</button>
-        </div>
-        <form class="add-outer-value" method="get">
-            <input type="number" value="" name="add-hours" placeholder="時間">
-            <input type="number" value="" name="add-minutes" placeholder="分">
-            <select name="time-options">
-                <option value="SRS">ス.レ.ス</option>
-                <option value="READING">読む</option>
-                <option value="LISTENING">聞く</option>
-                <option value="OTHER">他の</option>
-                <option value="WRITING">書く</option>
-                <option value="SPEAKING">話す</option>
-            </select>
-            <input type="checkbox" name="add-to-today" id="add-to-today">
-            <label for="add-to-today">今日ですか？</label>
-            &nbsp;
-            <input type="submit" value="送信" name="add-time">
-        </form>
-        <div class="levels-card">
-            <div class="game-achivements">
-                <p id="N5-title">ん5</p>
-                <div class="progress-bar">
-                    <div id="N5" class="progress-bar--value"></div>
-                </div>
-                <p>
-                    <span>462 時間</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>800 の語彙</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>漢字 100 字</span>
-                </p>
-            </div>
-            <div class="game-achivements">
-                <p id="N4-title">ん4</p>
-                <div class="progress-bar">
-                    <div id="N4" class="progress-bar--value"></div>
-                </div>
-                <p>
-                    <span>787 時間</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>1500 の語彙</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>漢字 300 字</span>
-                </p>
-            </div>
-            <div class="game-achivements">
-                <p id="N3-title">ん3</p>
-                <div class="progress-bar">
-                    <div id="N3" class="progress-bar--value"></div>
-                </div>
-                <p>
-                    <span>1325 時間</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>3700 の語彙</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>漢字 650 字</span>
-                </p>
-            </div>
-            <div class="game-achivements">
-                <p id="N2-title">ん2</p>
-                <div class="progress-bar">
-                    <div id="N2" class="progress-bar--value"></div>
-                </div>
-                <p>
-                    <span>2200 時間</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>6000 の語彙</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>漢字 1000 字</span>
-                </p>
-            </div>
-            <div class="game-achivements">
-                <p id="N1-title">ん1</p>
-                <div class="progress-bar">
-                    <div id="N1" class="progress-bar--value"></div>
-                </div>
-                <p>
-                    <span>3900 時間</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>10000 の語彙</span>
-                    <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                    <span>漢字 2200 字</span>
-                </p>
-            </div>
+            <div class="tasts-list"></div>
         </div>
         <div class="loading-screen">
             <p class="loading-text">読み込み中</p>

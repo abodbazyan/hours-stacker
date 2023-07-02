@@ -18,7 +18,8 @@ const STORAGE = {
     WRITING: 'time_writing',
     SPEAKING: 'time_speaking',
     SESSION: 'time_session',
-    TODAY: 'time_today'
+    TODAY: 'time_today',
+    TASKS_LIST: 'tasks_list'
 };
 
 initializeApp(firebaseConfig);
@@ -234,12 +235,25 @@ function displayData() {
             date: new Date()
         };
 
+        const tasks_list = getValue(STORAGE.TASKS_LIST);
+        const new_tasks_list = tasks_list.map(task => ({
+            ...task,
+            completed: false
+        }));
+
         setValue(STORAGE.TODAY, newDate);
+        setValue(STORAGE.TASKS_LIST, new_tasks_list);
     }
+
+    renderToDoList();
 };
 
 function getValue(key) {
-    if (key == STORAGE.SESSION || key == STORAGE.TODAY) {
+    if (
+        key == STORAGE.SESSION ||
+        key == STORAGE.TODAY ||
+        key == STORAGE.TASKS_LIST
+    ) {
         return JSON.parse(window.localStorage.getItem(key)) || 0;
     } else {
         return state?.[key];
@@ -295,4 +309,55 @@ function convertMsToHM(milliseconds, format) {
 function isToday(dateParameter) {
     const today = new Date();
     return dateParameter?.getDate() === today?.getDate() && dateParameter?.getMonth() === today?.getMonth() && dateParameter?.getFullYear() === today?.getFullYear();
+};
+
+function todoListItemClicked(event) {
+    const tasks_list = getValue(STORAGE.TASKS_LIST);
+    const new_tasks_list = tasks_list.map(task => {
+        if (task.id == event.target.id) {
+            return {
+                ...task,
+                completed: !task.completed
+            }
+        } else {
+            return task;
+        }
+    });
+
+    setValue(STORAGE.TASKS_LIST, new_tasks_list);
+};
+
+function renderToDoList() {
+    const tasks_list = getValue(STORAGE.TASKS_LIST);
+
+    const tasks = tasks_list.map(function (task) {
+        return createToDoListElement(task);
+    });
+
+    document.querySelector('.tasts-list').append(...tasks);
+};
+
+function createToDoListElement(task) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const span_mark = document.createElement('span');
+    const span_desc = document.createElement('span');
+
+    label.classList.add('tasks-list-item');
+    span_mark.classList.add('tasks-list-mark');
+
+    input.classList.add('tasks-list-cb');
+    input.setAttribute("type", "checkbox");
+    input.setAttribute("name", task.id);
+    input.setAttribute("value", task.id);
+    task.completed && input.setAttribute("checked", task.completed);
+
+    span_desc.classList.add('tasks-list-desc');
+    span_desc.innerText = task.text;
+    span_desc.id = task.id;
+    span_desc.onclick = todoListItemClicked;
+
+    label.append(input, span_mark, span_desc);
+
+    return label;
 };

@@ -4,8 +4,27 @@
     --dark-3: #2f3136;
     --dark-4: #40444b;
     --white: #ffffff;
+    --gray: #8a9a9b;
     --success: #32cd32;
     --warning: #ffd700;
+}
+
+@font-face {
+    font-family: NotoSansJP;
+    src: url(./assets/fonts/NotoSansJP-ExtraLight.ttf);
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: NotoSansJP;
+    src: url(./assets/fonts/NotoSansJP-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: NotoSansJP;
+    src: url(./assets/fonts/NotoSansJP-Bold.ttf);
+    font-weight: 700;
 }
 
 body,
@@ -16,7 +35,8 @@ ul {
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: NotoSansJP, sans-serif;
+    font-weight: 200;
     line-height: 1.6;
     color: var(--white);
     background-color: var(--dark-1);
@@ -26,9 +46,12 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+    width: calc(100% - 16px);
+}
+
+.time-tracker {
+    display: flex;
+    flex-direction: column;
 }
 
 .steam-card {
@@ -39,6 +62,17 @@ body {
     margin-bottom: 0px;
     background-color: var(--dark-4);
     position: relative;
+}
+
+.koohii-img {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 0;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    object-position: 0% 0%;
 }
 
 .game-info {
@@ -59,8 +93,9 @@ body {
 
 .game-info--name {
     font-size: 34px;
+    font-weight: 400;
     margin-left: 8px;
-    text-shadow: 0px 0px 5px #fff;
+    text-shadow: 0px 0px 5px var(--white);
 }
 
 .game-info--hours {
@@ -250,39 +285,17 @@ body {
 .progress-bar-complete {
     color: var(--warning);
     text-shadow: 0px 0px 4px var(--warning);
+    font-weight: 700 !important;
 }
 
 .game-achivements p:first-child {
     font-size: 20px;
-    font-weight: 800;
+    font-weight: 400;
 }
 
 .game-achivements p .seperator {
     color: crimson;
-    font-weight: 800;
-}
-
-.bg-img {
-    position: absolute;
-    z-index: -1;
-}
-
-.bg-img-4 {
-    top: 92px;
-    right: -64px;
-}
-
-.bg-img-5 {
-    top: 12px;
-    left: -64px;
-    transform: rotateY(180deg);
-}
-
-.bg-img-8 {
-    top: 0px;
-    right: -66px;
-    z-index: 0;
-    transform: rotateZ(15deg)
+    font-weight: 700;
 }
 
 .loading-screen {
@@ -292,7 +305,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgb(32, 34, 37, 0.8);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(8px);
 }
 
 .loading-screen .loading-text {
@@ -306,4 +319,94 @@ body {
     font-size: 34px;
     pointer-events: none;
     background-color: var(--dark-4);
+}
+
+.habit-tracker {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    background-color: var(--dark-4);
+}
+
+.habit-tracker .tasks-header {
+    margin: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: crimson;
+}
+
+.habit-tracker .tasks-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.habit-tracker .tasks-list-item:last-child {
+    margin-bottom: 8px;
+}
+
+.tasks-list-item {
+    display: block;
+    line-height: 24px;
+    padding: 8px 15px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tasks-list-cb {
+    display: none;
+}
+
+.tasks-list-mark {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray);
+    border-radius: 12px;
+}
+
+.tasks-list-mark:before {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -11px 0 0 -7px;
+    height: 8px;
+    width: 18px;
+    border: solid var(--success);
+    border-width: 0 0 4px 4px;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.tasks-list-cb:checked~.tasks-list-mark {
+    border-color: var(--success);
+}
+
+.tasks-list-cb:checked~.tasks-list-mark:before {
+    display: block;
+}
+
+.tasks-list-desc {
+    font-weight: bold;
+    color: var(--gray);
+}
+
+.tasks-list-cb:checked~.tasks-list-desc {
+    color: var(--success);
+    text-decoration: line-through var(--success) 2px;
 }
