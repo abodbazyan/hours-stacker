@@ -226,6 +226,7 @@ function displayData() {
     }
 
     const today_data = getValue(STORAGE.TODAY);
+    const tasks_list_html = document.querySelector('.tasts-list');
 
     if (isToday(new Date(today_data?.date))) {
         html_today_result_time.innerText = convertMsToHM(today_data.time, 'hm');
@@ -245,7 +246,9 @@ function displayData() {
         setValue(STORAGE.TASKS_LIST, new_tasks_list);
     }
 
-    renderToDoList();
+    if (tasks_list_html.children.length == 0) {
+        renderToDoList();
+    }
 };
 
 function getValue(key) {
@@ -329,12 +332,13 @@ function todoListItemClicked(event) {
 
 function renderToDoList() {
     const tasks_list = getValue(STORAGE.TASKS_LIST);
+    const tasks_list_html = document.querySelector('.tasts-list');
 
     const tasks = tasks_list.map(function (task) {
         return createToDoListElement(task);
     });
 
-    document.querySelector('.tasts-list').append(...tasks);
+    tasks_list_html.append(...tasks);
 };
 
 function createToDoListElement(task) {
