@@ -410,3 +410,49 @@ body {
     color: var(--success);
     text-decoration: line-through var(--success) 2px;
 }
+
+.stats-tracker {
+    position: absolute;
+    top: 24px;
+    right: 8px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    background-color: var(--dark-4);
+}
+
+.stats-tracker .stats-header {
+    margin: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: crimson;
+}
+
+.stats-tracker .stats-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.stats-tracker ul {
+    list-style: none;
+    margin: 0px 16px;
+    font-size: 14px;
+}
+
+.stats-tracker ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px;
+    font-size: 18px;
+}
+
+.stats-tracker ul li:hover {
+    background-color: var(--dark-3);
+}
+
+.stats-tracker ul:last-child {
+    margin-bottom: 8px;
+}

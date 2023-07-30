@@ -19,7 +19,17 @@ const STORAGE = {
     SPEAKING: 'time_speaking',
     SESSION: 'time_session',
     TODAY: 'time_today',
+    STATS: 'time_stats',
     TASKS_LIST: 'tasks_list'
+};
+
+const translations = {
+    SRS: 'ス.レ.ス',
+    READING: '読む',
+    LISTENING: '聞く',
+    OTHER: '他の活動',
+    WRITING: '書く',
+    SPEAKING: '話す'
 };
 
 initializeApp(firebaseConfig);
@@ -97,11 +107,20 @@ function setupApp() {
                 const new_total_time = current_total_time + session_time;
                 const today_data = getValue(STORAGE.TODAY);
                 const new_today_time = today_data.time + session_time;
+                const stats_list = getValue(STORAGE.STATS);
+
+                if (!stats_list[this.dataset.type]) {
+                    stats_list[this.dataset.type] = 0;
+                    stats_list[this.dataset.type] = session_time
+                } else {
+                    stats_list[this.dataset.type] = stats_list[this.dataset.type] + session_time
+                }
 
                 today_data.time = new_today_time;
 
                 setValue(STORAGE.SESSION, 0);
                 setValue(STORAGE.TODAY, today_data);
+                setValue(STORAGE.STATS, stats_list);
                 updateValue(STORAGE[this.dataset.type], new_total_time);
 
                 html_session_result_time.innerText = convertMsToHM(session_time, 'hm');
@@ -134,9 +153,20 @@ function setupApp() {
         const total = result + current_time;
 
         if (add_to_today.checked) {
+            const stats_list = getValue(STORAGE.STATS);
             const new_today_time = today_data.time + result;
+
+            if (!stats_list[time_options.value]) {
+                stats_list[time_options.value] = 0;
+                stats_list[time_options.value] = result
+            } else {
+                stats_list[time_options.value] = stats_list[time_options.value] + result
+            }
+
             today_data.time = new_today_time;
+
             setValue(STORAGE.TODAY, today_data);
+            setValue(STORAGE.STATS, stats_list);
         }
 
         updateValue(STORAGE[time_options.value], total);
@@ -165,7 +195,32 @@ function displayData() {
     const html_title_n2 = document.querySelector('#N2-title');
     const html_title_n1 = document.querySelector('#N1-title');
     const html_today_result_time = document.querySelector('.today-result--time');
+    const html_stats_list = document.querySelector('.stats-list');
+    const stats_list = getValue(STORAGE.STATS);
+    const stats_list_keys = Object.keys(stats_list)
     let total_value = 0;
+
+    if (stats_list_keys.length) {
+        stats_list_keys.forEach(key => {
+            const existing_stat = document.querySelector(`[data-stats=${key}]`);
+            const stat_value = convertMsToHM(stats_list[key], 'hm');
+
+            if (existing_stat) {
+                existing_stat.innerText = stat_value;
+            } else {
+                const item = document.createElement('li');
+                const span_name = document.createElement('span');
+                const span_value = document.createElement('span');
+
+                span_name.innerText = translations[key];
+                span_value.innerText = stat_value;
+                span_value.setAttribute("data-stats", key);
+
+                item.append(span_name, span_value);
+                html_stats_list.appendChild(item);
+            }
+        });
+    }
 
     html_hours_elements.forEach(element => {
         const element_value = getValue(STORAGE[element.dataset.hours]);
@@ -244,6 +299,7 @@ function displayData() {
 
         setValue(STORAGE.TODAY, newDate);
         setValue(STORAGE.TASKS_LIST, new_tasks_list);
+        setValue(STORAGE.STATS, {});
     }
 
     if (tasks_list_html.children.length == 0) {
@@ -255,7 +311,8 @@ function getValue(key) {
     if (
         key == STORAGE.SESSION ||
         key == STORAGE.TODAY ||
-        key == STORAGE.TASKS_LIST
+        key == STORAGE.TASKS_LIST ||
+        key == STORAGE.STATS
     ) {
         return JSON.parse(window.localStorage.getItem(key)) || 0;
     } else {
