@@ -196,31 +196,7 @@ function displayData() {
     const html_title_n1 = document.querySelector('#N1-title');
     const html_today_result_time = document.querySelector('.today-result--time');
     const html_stats_list = document.querySelector('.stats-list');
-    const stats_list = getValue(STORAGE.STATS);
-    const stats_list_keys = Object.keys(stats_list)
     let total_value = 0;
-
-    if (stats_list_keys.length) {
-        stats_list_keys.forEach(key => {
-            const existing_stat = document.querySelector(`[data-stats=${key}]`);
-            const stat_value = convertMsToHM(stats_list[key], 'hm');
-
-            if (existing_stat) {
-                existing_stat.innerText = stat_value;
-            } else {
-                const item = document.createElement('li');
-                const span_name = document.createElement('span');
-                const span_value = document.createElement('span');
-
-                span_name.innerText = translations[key];
-                span_value.innerText = stat_value;
-                span_value.setAttribute("data-stats", key);
-
-                item.append(span_name, span_value);
-                html_stats_list.appendChild(item);
-            }
-        });
-    }
 
     html_hours_elements.forEach(element => {
         const element_value = getValue(STORAGE[element.dataset.hours]);
@@ -304,6 +280,31 @@ function displayData() {
 
     if (tasks_list_html.children.length == 0) {
         renderToDoList();
+    }
+
+    const stats_list = getValue(STORAGE.STATS);
+    const stats_list_keys = Object.keys(stats_list)
+
+    if (stats_list_keys.length) {
+        stats_list_keys.forEach(key => {
+            const existing_stat = document.querySelector(`[data-stats=${key}]`);
+            const stat_value = convertMsToHM(stats_list[key], 'hm');
+
+            if (existing_stat) {
+                existing_stat.innerText = stat_value;
+            } else {
+                const item = document.createElement('li');
+                const span_name = document.createElement('span');
+                const span_value = document.createElement('span');
+
+                span_name.innerText = translations[key];
+                span_value.innerText = stat_value;
+                span_value.setAttribute("data-stats", key);
+
+                item.append(span_name, span_value);
+                html_stats_list.appendChild(item);
+            }
+        });
     }
 };
 
