@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.png">
     <script defer src="bundle.js"></script>
@@ -17,49 +20,45 @@
             <div class="steam-card">
                 <div class="game-info">
                     <div class="game-info--photo">
-                        <img src="assets/imgs/japan.webp" alt="japan" width="900" height="529" draggable="false">
+                        <img src="assets/imgs/russia.webp" alt="russia" width="900" height="529" draggable="false">
                     </div>
                     <div class="game-info--name">
-                        日本語
+                        Русский язык
                     </div>
                     <div class="game-info--hours">
                         <span id="game-info-hours">
-                            00 : 00 &nbsp; 合計時間
+                            00 : 00 &nbsp; hrs on record
                         </span>
                         <span id="show-details">
-                            詳細を表示
+                            Show details
                         </span>
                     </div>
                 </div>
-                <a href="https://kanji.koohii.com/study" target="_blank">
-                    <img class="koohii-img" src="https://kanji.koohii.com/images/3.0/nav/koohii-logo.svg"
-                        draggable="false" />
-                </a>
             </div>
             <div id="hours-details" class="toggle-container">
                 <ul>
                     <li>
-                        <span>ス.レ.ス</span>
+                        <span>SRS</span>
                         <span data-hours="SRS">...</span>
                     </li>
                     <li>
-                        <span>読む</span>
+                        <span>Reading</span>
                         <span data-hours="READING">...</span>
                     </li>
                     <li>
-                        <span>聞く</span>
+                        <span>Listening</span>
                         <span data-hours="LISTENING">...</span>
                     </li>
                     <li>
-                        <span>他の活動</span>
+                        <span>Others</span>
                         <span data-hours="OTHER">...</span>
                     </li>
                     <li>
-                        <span>書く</span>
+                        <span>Writing</span>
                         <span data-hours="WRITING">...</span>
                     </li>
                     <li>
-                        <span>話す</span>
+                        <span>Speaking</span>
                         <span data-hours="SPEAKING">...</span>
                     </li>
                 </ul>
@@ -70,7 +69,7 @@
                 </div>
                 &nbsp;
                 <div class="today-result--text">
-                    今日の時間
+                    Hours today
                 </div>
             </div>
             <div class="session-result">
@@ -79,115 +78,116 @@
                 </div>
                 &nbsp;
                 <div class="session-result--text">
-                    セッション時間
+                    Hours this session
                 </div>
             </div>
             <div class="panel">
-                <button class="panel-item" data-type="SRS">ス.レ.ス</button>
-                <button class="panel-item" data-type="READING">読む</button>
-                <button class="panel-item" data-type="LISTENING">聞く</button>
-                <button class="panel-item" data-type="OTHER">他の活動</button>
-                <button class="panel-item" data-type="WRITING">書く</button>
-                <button class="panel-item" data-type="SPEAKING">話す</button>
+                <button class="panel-item" data-type="SRS">SRS</button>
+                <button class="panel-item" data-type="READING">Reading</button>
+                <button class="panel-item" data-type="LISTENING">Listening</button>
+                <button class="panel-item" data-type="OTHER">Others</button>
+                <button class="panel-item" data-type="WRITING">Writing</button>
+                <button class="panel-item" data-type="SPEAKING">Speaking</button>
             </div>
             <form class="add-outer-value" method="get">
-                <input type="number" value="" name="add-hours" placeholder="時間">
-                <input type="number" value="" name="add-minutes" placeholder="分">
+                <input type="number" value="" name="add-hours" placeholder="Hours">
+                <input type="number" value="" name="add-minutes" placeholder="Minutes">
                 <select name="time-options">
-                    <option value="SRS">ス.レ.ス</option>
-                    <option value="READING">読む</option>
-                    <option value="LISTENING">聞く</option>
-                    <option value="OTHER">他の活動</option>
-                    <option value="WRITING">書く</option>
-                    <option value="SPEAKING">話す</option>
+                    <option value="SRS">SRS</option>
+                    <option value="READING">Reading</option>
+                    <option value="LISTENING">Listening</option>
+                    <option value="OTHER">Others</option>
+                    <option value="WRITING">Writing</option>
+                    <option value="SPEAKING">Speaking</option>
                 </select>
                 <input type="checkbox" name="add-to-today" id="add-to-today">
-                <label for="add-to-today">今日ですか？</label>
+                <label for="add-to-today">is Today?</label>
                 &nbsp;
-                <input type="submit" value="送信" name="add-time">
+                <input type="submit" value="Submit" name="add-time">
             </form>
             <div class="levels-card">
                 <div class="game-achivements">
-                    <p id="N5-title">ん5</p>
+                    <p id="A1-title">A1</p>
                     <div class="progress-bar">
-                        <div id="N5" class="progress-bar--value"></div>
+                        <div id="A1" class="progress-bar--value"></div>
                     </div>
                     <p>
-                        <span>462 時間</span>
+                        <span>50 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>800 単語</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>漢字 100 字</span>
+                        <span>500 Words</span>
                     </p>
                 </div>
                 <div class="game-achivements">
-                    <p id="N4-title">ん4</p>
+                    <p id="A2-title">A2</p>
                     <div class="progress-bar">
-                        <div id="N4" class="progress-bar--value"></div>
+                        <div id="A2" class="progress-bar--value"></div>
                     </div>
                     <p>
-                        <span>787 時間</span>
+                        <span>150 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>1500 単語</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>漢字 300 字</span>
+                        <span>1000 Words</span>
                     </p>
                 </div>
                 <div class="game-achivements">
-                    <p id="N3-title">ん3</p>
+                    <p id="B1-title">B1</p>
                     <div class="progress-bar">
-                        <div id="N3" class="progress-bar--value"></div>
+                        <div id="B1" class="progress-bar--value"></div>
                     </div>
                     <p>
-                        <span>1325 時間</span>
+                        <span>300 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>3700 単語</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>漢字 650 字</span>
+                        <span>2000 Words</span>
                     </p>
                 </div>
                 <div class="game-achivements">
-                    <p id="N2-title">ん2</p>
+                    <p id="B2-title">B2</p>
                     <div class="progress-bar">
-                        <div id="N2" class="progress-bar--value"></div>
+                        <div id="B2" class="progress-bar--value"></div>
                     </div>
                     <p>
-                        <span>2200 時間</span>
+                        <span>600 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>6000 単語</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>漢字 1000 字</span>
+                        <span>4000 Words</span>
                     </p>
                 </div>
                 <div class="game-achivements">
-                    <p id="N1-title">ん1</p>
+                    <p id="C1-title">C1</p>
                     <div class="progress-bar">
-                        <div id="N1" class="progress-bar--value"></div>
+                        <div id="C1" class="progress-bar--value"></div>
                     </div>
                     <p>
-                        <span>3900 時間</span>
+                        <span>1100 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>10000 単語</span>
+                        <span>8000 Words</span>
+                    </p>
+                </div>
+                <div class="game-achivements">
+                    <p id="C2-title">C2</p>
+                    <div class="progress-bar">
+                        <div id="C2" class="progress-bar--value"></div>
+                    </div>
+                    <p>
+                        <span>2200 Hours</span>
                         <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>漢字 2200 字</span>
+                        <span>16000 Words</span>
                     </p>
                 </div>
             </div>
         </div>
         <div class="habit-tracker">
             <div class="tasks-header">
-                <h3>トゥードゥーリスト</h3>
+                <h3>Todo List</h3>
             </div>
             <div class="tasts-list"></div>
         </div>
         <div class="stats-tracker">
             <div class="stats-header">
-                <h3>今日の統計</h3>
+                <h3>Today's Statistics</h3>
             </div>
             <ul class="stats-list"></ul>
         </div>
         <div class="loading-screen">
-            <p class="loading-text">読み込み中</p>
+            <p class="loading-text">Loading....</p>
         </div>
     </div>
 </body>
