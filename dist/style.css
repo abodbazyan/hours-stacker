@@ -28,6 +28,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    width: calc(100% - 16px);
 }
 
 .time-tracker {
@@ -382,7 +383,7 @@ body {
 .stats-tracker {
     position: absolute;
     top: 24px;
-    right: 24px;
+    right: 8px;
     display: flex;
     flex-direction: column;
     min-width: 300px;
