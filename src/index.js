@@ -184,18 +184,16 @@ function setupApp() {
 function displayData() {
     const html_hours_elements = document.querySelectorAll('[data-hours]');
     const html_game_info_hours = document.querySelector('#game-info-hours');
-    const html_progress_bar_a1 = document.querySelector('#A1');
-    const html_progress_bar_a2 = document.querySelector('#A2');
-    const html_progress_bar_b1 = document.querySelector('#B1');
-    const html_progress_bar_b2 = document.querySelector('#B2');
-    const html_progress_bar_c1 = document.querySelector('#C1');
-    const html_progress_bar_c2 = document.querySelector('#C2');
-    const html_title_a1 = document.querySelector('#A1-title');
-    const html_title_a2 = document.querySelector('#A2-title');
-    const html_title_b1 = document.querySelector('#B1-title');
-    const html_title_b2 = document.querySelector('#B2-title');
-    const html_title_c1 = document.querySelector('#C1-title');
-    const html_title_c2 = document.querySelector('#C2-title');
+    const html_progress_bar_n5 = document.querySelector('#N5');
+    const html_progress_bar_n4 = document.querySelector('#N4');
+    const html_progress_bar_n3 = document.querySelector('#N3');
+    const html_progress_bar_n2 = document.querySelector('#N2');
+    const html_progress_bar_n1 = document.querySelector('#N1');
+    const html_title_n5 = document.querySelector('#N5-title');
+    const html_title_n4 = document.querySelector('#N4-title');
+    const html_title_n3 = document.querySelector('#N3-title');
+    const html_title_n2 = document.querySelector('#N2-title');
+    const html_title_n1 = document.querySelector('#N1-title');
     const html_today_result_time = document.querySelector('.today-result--time');
     const html_stats_list = document.querySelector('.stats-list');
     let total_value = 0;
@@ -211,66 +209,51 @@ function displayData() {
 
     html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
 
-    if (progress < 50) {
-        html_progress_bar_a1.style.width = `${progress / 0.5}%`;
-    } else if (progress < 150) {
-        progress -= 50;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_progress_bar_a2.style.width = `${progress / 1}%`;
-    } else if (progress < 300) {
-        progress -= 150;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_progress_bar_b1.style.width = `${progress / 1.5}%`;
-    } else if (progress < 600) {
-        progress -= 300;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_progress_bar_b2.style.width = `${progress / 3}%`;
-    } else if (progress < 1100) {
-        progress -= 600;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_progress_bar_b2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_title_b2.classList.add('progress-bar-complete');
-        html_progress_bar_c1.style.width = `${progress / 5}%`;
-    } else if (progress < 2200) {
-        progress -= 1100;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_progress_bar_b2.style.width = `${100}%`;
-        html_progress_bar_c1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_title_b2.classList.add('progress-bar-complete');
-        html_title_c1.classList.add('progress-bar-complete');
-        html_progress_bar_c2.style.width = `${progress / 11}%`;
+    if (progress <= 462) {
+        html_progress_bar_n5.style.width = `${progress / 4.62}%`;
+    } else if (progress <= 787) {
+        progress -= 462;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${progress / 3.25}%`;
+        html_title_n5.classList.add('progress-bar-complete');
+    } else if (progress <= 1325) {
+        progress -= 787;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_progress_bar_n3.style.width = `${progress / 5.38}%`;
+    } else if (progress <= 2200) {
+        progress -= 1325;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
+        html_progress_bar_n2.style.width = `${progress / 8.75}%`;
+    } else if (progress < 3900) {
+        progress -= 2200;
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_progress_bar_n2.style.width = `${100}%`;
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
+        html_title_n2.classList.add('progress-bar-complete');
+        html_progress_bar_n1.style.width = `${progress / 17}%`;
     } else {
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_progress_bar_b2.style.width = `${100}%`;
-        html_progress_bar_c1.style.width = `${100}%`;
-        html_progress_bar_c2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_title_b2.classList.add('progress-bar-complete');
-        html_title_c1.classList.add('progress-bar-complete');
-        html_title_c2.classList.add('progress-bar-complete');
+        html_progress_bar_n5.style.width = `${100}%`;
+        html_progress_bar_n4.style.width = `${100}%`;
+        html_progress_bar_n3.style.width = `${100}%`;
+        html_progress_bar_n2.style.width = `${100}%`;
+        html_progress_bar_n1.style.width = `${100}%`;
+        html_title_n5.classList.add('progress-bar-complete');
+        html_title_n4.classList.add('progress-bar-complete');
+        html_title_n3.classList.add('progress-bar-complete');
+        html_title_n2.classList.add('progress-bar-complete');
+        html_title_n1.classList.add('progress-bar-complete');
     }
 
     const today_data = getValue(STORAGE.TODAY);
