@@ -39,9 +39,11 @@ const colRef = collection(db, 'time');
 let state = undefined, isFirstLoad = true;
 
 onSnapshot(colRef, (snapshot) => {
+    let document = snapshot?.docs?.filter(el => el?.id == 'jLg4hvBkRWelFoTGNRZq')?.[0];
+
     state = {
-        id: snapshot?.docs[0]?.id,
-        ...snapshot?.docs[0]?.data()
+        id: document?.id,
+        ...document?.data()
     };
 
     if (isFirstLoad) {
