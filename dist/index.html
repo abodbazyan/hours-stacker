@@ -5,194 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="assets/imgs/favicon.png">
-    <script defer src="bundle.js"></script>
     <title>hours-stacker | watch those hours stack up</title>
 </head>
 
 <body>
-    <div id="app">
-        <div class="time-tracker">
-            <div class="steam-card">
-                <div class="game-info">
-                    <div class="game-info--photo">
-                        <img src="assets/imgs/japan.webp" alt="japan" width="900" height="529" draggable="false">
-                    </div>
-                    <div class="game-info--name">
-                        日本語
-                    </div>
-                    <div class="game-info--hours">
-                        <span id="game-info-hours">
-                            00 : 00 &nbsp; hrs on record
-                        </span>
-                        <span id="show-details">
-                            Show details
-                        </span>
-                    </div>
-                </div>
-                <a href="https://kanji.koohii.com/study" target="_blank">
-                    <img class="koohii-img" src="https://kanji.koohii.com/images/3.0/nav/koohii-logo.svg"
-                        draggable="false" />
-                </a>
-            </div>
-            <div id="hours-details" class="toggle-container">
-                <ul>
-                    <li>
-                        <span>SRS</span>
-                        <span data-hours="SRS">...</span>
-                    </li>
-                    <li>
-                        <span>Reading</span>
-                        <span data-hours="READING">...</span>
-                    </li>
-                    <li>
-                        <span>Listening</span>
-                        <span data-hours="LISTENING">...</span>
-                    </li>
-                    <li>
-                        <span>Others</span>
-                        <span data-hours="OTHER">...</span>
-                    </li>
-                    <li>
-                        <span>Writing</span>
-                        <span data-hours="WRITING">...</span>
-                    </li>
-                    <li>
-                        <span>Speaking</span>
-                        <span data-hours="SPEAKING">...</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="today-result">
-                <div class="today-result--time">
-                    00 : 00
-                </div>
-                &nbsp;
-                <div class="today-result--text">
-                    Hours today
-                </div>
-            </div>
-            <div class="session-result">
-                <div class="session-result--time">
-                    00 : 00
-                </div>
-                &nbsp;
-                <div class="session-result--text">
-                    Hours this session
-                </div>
-            </div>
-            <div class="panel">
-                <button class="panel-item" data-type="SRS">SRS</button>
-                <button class="panel-item" data-type="READING">Reading</button>
-                <button class="panel-item" data-type="LISTENING">Listening</button>
-                <button class="panel-item" data-type="OTHER">Others</button>
-                <button class="panel-item" data-type="WRITING">Writing</button>
-                <button class="panel-item" data-type="SPEAKING">Speaking</button>
-            </div>
-            <form class="add-outer-value" method="get">
-                <input type="number" value="" name="add-hours" placeholder="Hours">
-                <input type="number" value="" name="add-minutes" placeholder="Minutes">
-                <select name="time-options">
-                    <option value="SRS">SRS</option>
-                    <option value="READING">Reading</option>
-                    <option value="LISTENING">Listening</option>
-                    <option value="OTHER">Others</option>
-                    <option value="WRITING">Writing</option>
-                    <option value="SPEAKING">Speaking</option>
-                </select>
-                <input type="checkbox" name="add-to-today" id="add-to-today">
-                <label for="add-to-today">is Today?</label>
-                &nbsp;
-                <input type="submit" value="Submit" name="add-time">
-            </form>
-            <div class="levels-card">
-                <div class="game-achivements">
-                    <p id="N5-title">N5</p>
-                    <div class="progress-bar">
-                        <div id="N5" class="progress-bar--value"></div>
-                    </div>
-                    <p>
-                        <span>462 Hours</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>800 Words</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>100 Kanji</span>
-                    </p>
-                </div>
-                <div class="game-achivements">
-                    <p id="N4-title">N4</p>
-                    <div class="progress-bar">
-                        <div id="N4" class="progress-bar--value"></div>
-                    </div>
-                    <p>
-                        <span>787 Hours</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>1500 Words</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>300 Kanji</span>
-                    </p>
-                </div>
-                <div class="game-achivements">
-                    <p id="N3-title">N3</p>
-                    <div class="progress-bar">
-                        <div id="N3" class="progress-bar--value"></div>
-                    </div>
-                    <p>
-                        <span>1325 Hours</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>3700 Words</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>650 Kanji</span>
-                    </p>
-                </div>
-                <div class="game-achivements">
-                    <p id="N2-title">N2</p>
-                    <div class="progress-bar">
-                        <div id="N2" class="progress-bar--value"></div>
-                    </div>
-                    <p>
-                        <span>2200 Hours</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>6000 Words</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>1000 Kanji</span>
-                    </p>
-                </div>
-                <div class="game-achivements">
-                    <p id="N1-title">N1</p>
-                    <div class="progress-bar">
-                        <div id="N1" class="progress-bar--value"></div>
-                    </div>
-                    <p>
-                        <span>3900 Hours</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>10000 Words</span>
-                        <span class="seperator">&nbsp;&nbsp;||&nbsp;&nbsp;</span>
-                        <span>2200 Kanji</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="habit-tracker">
-            <div class="tasks-header">
-                <h3>Todo List</h3>
-            </div>
-            <div class="tasts-list"></div>
-        </div>
-        <div class="stats-tracker">
-            <div class="stats-header">
-                <h3>Today's Statistics</h3>
-            </div>
-            <ul class="stats-list"></ul>
-        </div>
-        <div class="loading-screen">
-            <p class="loading-text">Loading....</p>
-        </div>
-    </div>
+    <!-- Redirection -->
+    <script>
+        const currentHour = new Date().getHours()
+        let destination;
+
+        if (currentHour < 12) {
+            destination = "japanese.html";
+        } else {
+            destination = "russian.html";
+        }
+
+        location.replace(destination);
+    </script>
 </body>
 
 </html>

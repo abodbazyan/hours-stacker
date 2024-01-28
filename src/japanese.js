@@ -11,16 +11,16 @@ const firebaseConfig = {
 };
 
 const STORAGE = {
-    SRS: 'time_srs',
-    READING: 'time_reading',
-    LISTENING: 'time_listening',
-    OTHER: 'time_other',
-    WRITING: 'time_writing',
-    SPEAKING: 'time_speaking',
-    SESSION: 'time_session',
-    TODAY: 'time_today',
-    STATS: 'time_stats',
-    TASKS_LIST: 'tasks_list'
+    SRS: 'jp_time_srs',
+    READING: 'jp_time_reading',
+    LISTENING: 'jp_time_listening',
+    OTHER: 'jp_time_other',
+    WRITING: 'jp_time_writing',
+    SPEAKING: 'jp_time_speaking',
+    SESSION: 'jp_time_session',
+    TODAY: 'jp_time_today',
+    STATS: 'jp_time_stats',
+    TASKS_LIST: 'jp_tasks_list'
 };
 
 const translations = {
