@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, updateDoc, doc } from 'firebase/firestore';
+import { confetti } from 'tsparticles-confetti/esm'
 
 const firebaseConfig = {
     apiKey: "AIzaSyCptZszH6wv8Bel3YixMmPsU1GrUQMFkAY",
@@ -36,6 +37,8 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 const colRef = collection(db, 'time');
+const confettiEndDate = Date.now() + 2.5 * 1000;
+const confettiColors = ["fff200", "ff1e00", "0011ff", "0011ff", "00ff1e", "ffffff"];
 let state = undefined, isFirstLoad = true;
 
 onSnapshot(colRef, (snapshot) => {
@@ -54,9 +57,15 @@ onSnapshot(colRef, (snapshot) => {
     }
 
     const timeout = Math.floor(Math.random() * (1000 - 500 + 1) + 500);
+    const today_data = getValue(STORAGE.TODAY);
+    const isTodaysChallengeCompleted = parseInt(convertMsToHM(today_data.time, 'hm').split(' : ')[0]) >= today_data.goal;
 
     setTimeout(() => {
         setLoading(false);
+
+        if (isTodaysChallengeCompleted) {
+            playConfettiEffect();
+        }
     }, timeout);
 });
 
@@ -64,6 +73,16 @@ function setupApp() {
     const html_show_details = document.querySelector('#show-details');
     const action_btns = document.querySelectorAll('.panel-item');
     const add_outer_value_form = document.querySelector('.add-outer-value');
+    const game_info_name = window.document.querySelector('.game-info--name');
+
+    const flickerLetter = letter => `<span style="animation: text-flicker-in-glow ${Math.random() * 4}s linear both ">${letter}</span>`
+    const colorLetter = letter => `<span style="color: hsla(${Math.random() * 360}, 100%, 80%, 1);">${letter}</span>`;
+    const flickerAndColorText = text => text.split('').map(flickerLetter).map(colorLetter).join('');
+    const neonGlory = target => target.innerHTML = flickerAndColorText(target.textContent);
+
+    neonGlory(game_info_name);
+
+    game_info_name.onclick = ({ target }) => neonGlory(target);
 
     html_show_details.addEventListener('click', function (event) {
         event.preventDefault();
@@ -197,6 +216,7 @@ function displayData() {
     const html_title_n2 = document.querySelector('#N2-title');
     const html_title_n1 = document.querySelector('#N1-title');
     const html_today_result_time = document.querySelector('.today-result--time');
+    const html_today_result_text = document.querySelector('.today-result--text');
     const html_stats_list = document.querySelector('.stats-list');
     let total_value = 0;
 
@@ -262,11 +282,19 @@ function displayData() {
     const tasks_list_html = document.querySelector('.tasts-list');
 
     if (isToday(new Date(today_data?.date))) {
+        const isTodaysChallengeCompleted = parseInt(convertMsToHM(today_data.time, 'hm').split(' : ')[0]) >= today_data.goal;
+    
+        if (isTodaysChallengeCompleted) {
+            html_today_result_time.classList.add('today-result--completed');
+            html_today_result_text.classList.add('today-result--completed');
+        }
+
         html_today_result_time.innerText = convertMsToHM(today_data.time, 'hm');
     } else {
         const newDate = {
             time: 0,
-            date: new Date()
+            date: new Date(),
+            goal: today_data?.goal || 3
         };
 
         const tasks_list = getValue(STORAGE.TASKS_LIST);
@@ -424,4 +452,28 @@ function createToDoListElement(task) {
     label.append(input, span_mark, span_desc);
 
     return label;
+};
+
+const playConfettiEffect = () => {
+    (function frame() {
+        confetti({
+            particleCount: 2,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: confettiColors
+        });
+
+        confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: confettiColors
+        });
+
+        if (Date.now() < confettiEndDate) {
+            requestAnimationFrame(frame);
+        }
+    })();
 };
