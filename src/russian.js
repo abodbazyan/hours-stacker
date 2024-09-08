@@ -205,17 +205,9 @@ function setupApp() {
 function displayData() {
     const html_hours_elements = document.querySelectorAll('[data-hours]');
     const html_game_info_hours = document.querySelector('#game-info-hours');
-    const html_progress_bar_a1 = document.querySelector('#A1');
-    const html_progress_bar_a2 = document.querySelector('#A2');
-    const html_progress_bar_b1 = document.querySelector('#B1');
     const html_progress_bar_b2 = document.querySelector('#B2');
-    const html_progress_bar_c1 = document.querySelector('#C1');
     const html_progress_bar_c2 = document.querySelector('#C2');
-    const html_title_a1 = document.querySelector('#A1-title');
-    const html_title_a2 = document.querySelector('#A2-title');
-    const html_title_b1 = document.querySelector('#B1-title');
     const html_title_b2 = document.querySelector('#B2-title');
-    const html_title_c1 = document.querySelector('#C1-title');
     const html_title_c2 = document.querySelector('#C2-title');
     const html_today_result_time = document.querySelector('.today-result--time');
     const html_today_result_text = document.querySelector('.today-result--text');
@@ -233,65 +225,17 @@ function displayData() {
 
     html_game_info_hours.innerText = `${value_game_info_hours} \u00A0 hrs on record`;
 
-    if (progress < 100) {
-        html_progress_bar_a1.style.width = `${progress / 1}%`;
-    } else if (progress < 250) {
-        progress -= 100;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_progress_bar_a2.style.width = `${progress / 1.5}%`;
-    } else if (progress < 500) {
-        progress -= 250;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_progress_bar_b1.style.width = `${progress / 2.5}%`;
-    } else if (progress < 700) {
-        progress -= 500;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_progress_bar_b2.style.width = `${progress / 2}%`;
-    } else if (progress < 1100) {
-        progress -= 700;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
-        html_progress_bar_b2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
-        html_title_b2.classList.add('progress-bar-complete');
-        html_progress_bar_c1.style.width = `${progress / 4}%`;
+    if (progress < 650) {
+        html_progress_bar_b2.style.width = `${progress / 6.5}%`;
     } else if (progress < 1500) {
-        progress -= 1100;
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
+        progress -= 650;
         html_progress_bar_b2.style.width = `${100}%`;
-        html_progress_bar_c1.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
         html_title_b2.classList.add('progress-bar-complete');
-        html_title_c1.classList.add('progress-bar-complete');
-        html_progress_bar_c2.style.width = `${progress / 4}%`;
+        html_progress_bar_c2.style.width = `${progress / 8.5}%`;
     } else {
-        html_progress_bar_a1.style.width = `${100}%`;
-        html_progress_bar_a2.style.width = `${100}%`;
-        html_progress_bar_b1.style.width = `${100}%`;
         html_progress_bar_b2.style.width = `${100}%`;
-        html_progress_bar_c1.style.width = `${100}%`;
         html_progress_bar_c2.style.width = `${100}%`;
-        html_title_a1.classList.add('progress-bar-complete');
-        html_title_a2.classList.add('progress-bar-complete');
-        html_title_b1.classList.add('progress-bar-complete');
         html_title_b2.classList.add('progress-bar-complete');
-        html_title_c1.classList.add('progress-bar-complete');
         html_title_c2.classList.add('progress-bar-complete');
     }
 
